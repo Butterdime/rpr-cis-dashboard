@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error - RPR CIS Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Error</h1>
+            <a href="/" class="btn btn-secondary">← Back to Home</a>
+        </header>
+        
+        <main>
+            <div class="card error">
+                <h2>An Error Occurred</h2>
+                <p>{{ message }}</p>
+                <a href="/" class="btn btn-primary">Try Again</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

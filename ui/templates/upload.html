@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Documents - RPR CIS Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Document Upload</h1>
+            <a href="/" class="btn btn-secondary">← Back to Home</a>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>Upload Customer Documents</h2>
+                <p>Please upload at least 2 documents for identity verification (e.g., driver's license, passport, utility bill).</p>
+                
+                {% if error %}
+                <div class="alert alert-error">{{ error }}</div>
+                {% endif %}
+                
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="documents">Select Documents:</label>
+                        <input type="file" id="documents" name="documents" multiple accept="image/*,.pdf" required>
+                        <small>Supported formats: PNG, JPG, JPEG, GIF, PDF</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Upload & Verify</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

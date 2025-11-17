@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPR CIS Dashboard v6.0</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RPR CIS Dashboard v6.0</h1>
+            <p>Complete Customer Identity Verification System</p>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>Welcome</h2>
+                <p>Upload customer documents for identity verification using advanced AI-powered quality assessment and OCR.</p>
+                <a href="/upload" class="btn btn-primary">Start Verification</a>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3>Quality Assessment</h3>
+                    <p>Multi-metric document quality analysis (DPI, contrast, rotation, blur)</p>
+                </div>
+                <div class="feature">
+                    <h3>OCR & Extraction</h3>
+                    <p>Accurate text extraction with confidence scoring</p>
+                </div>
+                <div class="feature">
+                    <h3>Risk Assessment</h3>
+                    <p>Intelligent mismatch detection and risk tiering</p>
+                </div>
+                <div class="feature">
+                    <h3>Dispute Management</h3>
+                    <p>Complete dispute workflow with re-verification</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
