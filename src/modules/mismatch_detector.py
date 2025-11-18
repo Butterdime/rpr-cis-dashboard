@@ -15,7 +15,7 @@ class MismatchDetector:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         
-    def fuzzy_match(self, str1: str, str2: str, threshold: float = 0.85) -> Tuple[float, bool]:
+    def fuzzy_match(self, str1: str, str2: str, threshold: float = 0.80) -> Tuple[float, bool]:
         """
         Fuzzy string matching using Levenshtein-like approach
         Returns: (similarity_score, is_match)
@@ -31,8 +31,8 @@ class MismatchDetector:
         # Fuzzy match using SequenceMatcher
         similarity = SequenceMatcher(None, str1_norm, str2_norm).ratio()
         
-        # Determine if match (with tolerance)
-        is_match = similarity >= threshold
+        # Changed from 0.85 to 0.80 to catch more variations
+        is_match = similarity >= threshold  # threshold is now 0.80
         
         return (similarity, is_match)
     
@@ -97,9 +97,9 @@ class MismatchDetector:
             value2 = str(doc2_fields[field_name]) if doc2_fields[field_name] else ""
             
             if value1 and value2:
-                similarity, is_match = self.fuzzy_match(value1, value2)
+                similarity, _ = self.fuzzy_match(value1, value2)
                 
-                if not is_match:
+                if similarity < 1.0:  # Report any non-exact match as mismatch
                     mismatch = self.classify_mismatch_severity(
                         field_name, value1, value2, similarity
                     )

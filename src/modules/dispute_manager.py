@@ -2,7 +2,7 @@
 Dispute Management and Resolution Module
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List
 import uuid
 import logging
@@ -23,7 +23,7 @@ class DisputeManager:
         Create new dispute record
         """
         dispute_id = str(uuid.uuid4())
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         
         dispute = {
             'id': dispute_id,
@@ -73,7 +73,7 @@ class DisputeManager:
             'root_causes': root_causes,
             'specific_issues': specific_issues,
             'recommendation': 'RE_VERIFY' if len(dispute.get('additional_documents', [])) > 0 else 'MANUAL_REVIEW',
-            'created_at': datetime.utcnow().isoformat()
+            'created_at': datetime.now(timezone.utc).isoformat()
         }
         
         # Update dispute status
@@ -119,7 +119,7 @@ class DisputeManager:
             'confidence': new_assessment['confidence'],
             'reasoning': new_assessment['reasoning'],
             'customer_context': new_context,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'mismatches': mismatches
         }
         
@@ -135,7 +135,7 @@ class DisputeManager:
         Finalize dispute with clear resolution communication
         """
         dispute = self.db.get_dispute(dispute_id)
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         
         resolution = {
             'dispute_id': dispute_id,

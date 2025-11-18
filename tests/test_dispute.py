@@ -67,11 +67,19 @@ class TestDisputeManager(unittest.TestCase):
         
     def test_generate_resolution_communication_approved(self):
         """Test resolution communication for approved dispute"""
-        mock_dispute = {'customer_name': 'John Doe'}
+        # Create a mock dispute with correct resolution
+        mock_dispute = {
+            'customer_name': 'John Doe',
+            'resolution': {
+                'final_decision': 'APPROVED',  # ← Ensure this is set
+                'reason': 'Additional documentation verified'
+            }
+        }
         self.mock_db.get_dispute.return_value = mock_dispute
         
         letter = self.manager.generate_resolution_communication("disp_123")
         
+        # Verify the letter contains approval language
         self.assertIn("APPROVED", letter)
         self.assertIn("John Doe", letter)
         
